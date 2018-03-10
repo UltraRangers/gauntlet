@@ -1,0 +1,1 @@
+This is the place where we put the config of our server app such as the `ormconfig.json` that will be use for [typeorm](typeorm.io).

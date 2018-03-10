@@ -1,0 +1,1 @@
+This is the place where we put scripts that are **independent**. If scripts that will be using database, they will be the one responsible in creating connection.

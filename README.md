@@ -1,0 +1,1 @@
+Gauntlet - Based from the [ADR](https://github.com/pmjones/adr-example) design pattern.
