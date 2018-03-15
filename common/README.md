@@ -1,1 +1,0 @@
-This is the place where the client and server shared common files (eg: entities, interfaces, enums etc)
