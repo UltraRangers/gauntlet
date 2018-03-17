@@ -12,8 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, expressApp, {});
   setupClient(expressApp);
   await app.init();
-  await app.listen(port);
-  console.log(`server listening at http://localhost:${port}`);
+  await app.listen(port, () => { console.log(`server listening at http://localhost:${port}`); });
 }
 
 function setupClient(expressApp: Application) {
