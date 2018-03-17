@@ -7,7 +7,7 @@
     "build": "npm run build:server && npm run build:client",
     "build:server": "rimraf ./dist/server && tsc --project ./src/server",
     "build:client": "rimraf ./dist/client && webpack --progress --colors",
-    "start": "node ./dist/server/main.js"
+    "start": "node ./dist/server/www/index.js"
   },
   "author": "UltraRangers",
   "license": "ISC",
