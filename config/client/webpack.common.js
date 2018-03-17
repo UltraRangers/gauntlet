@@ -27,7 +27,7 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.js'],
-    plugins: [new TsconfigPathsPlugin({ configFile: path.join(src.client, 'tsconfig.json') })]
+    // plugins: [new TsconfigPathsPlugin({ configFile: path.join(src.client, 'tsconfig.json') })]
   },
 
   module: {
@@ -35,7 +35,13 @@ module.exports = {
       // angular typescript loader
       {
         test: /\.ts$/,
-        use: ['ts-loader', 'angular2-template-loader', 'angular-router-loader']
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: path.join(src.client, 'tsconfig.json')
+            }
+          }, 'angular2-template-loader', 'angular-router-loader']
       },
       // html loader
       {

@@ -1,8 +1,27 @@
+const express = require('express');
 import { NestFactory } from '@nestjs/core';
+import { Application, Request, Response } from 'express';
+import { resolve } from 'path';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const port = 3000 || process.env.NODE_PORT;
+  const expressApp = express();
+  const app = await NestFactory.create(AppModule, expressApp);
+  setUpClient(expressApp);
+  await app.init();
+  await app.listen(port);
+  console.log(`server listening at http://localhost:${port}`);
 }
+
+function setUpClient(expressApp: Application) {
+  expressApp.use(express.static(resolve(__dirname, '../../dist/client')));
+  expressApp.get('*', (request: Request, response: Response) => {
+    if (request.path.match(/\.(html|css|png|jpg|ttf|js|ico)$/)) {
+      response.status(404).send('Not found');
+    }
+    response.sendFile(resolve(__dirname, '../../dist/client/index.html'));
+  });
+}
+
 bootstrap();
