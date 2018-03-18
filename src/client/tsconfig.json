@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ]
+    },
+    "typeRoots": [
+      "../../node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ],
+  }
+}
