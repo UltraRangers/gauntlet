@@ -4,14 +4,14 @@
   "description": "",
   "main": "./dist/server/main.js",
   "scripts": {
-    "test": "npm run e2e:test",
+    "test": "npm run build:server && npm run unit:test && npm run e2e:test",
     "build": "npm run build:server && npm run build:client",
     "build:server": "rimraf ./dist/server && tsc --project ./src/server",
     "build:client": "rimraf ./dist/client && webpack --progress --colors",
     "migration:up": "typeorm migrations:run",
     "migration:down": "typeorm migrations:revert",
-    "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/modules/**/*.controller.test.js",
-    "unit:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/database/*.test.js",
+    "e2e:test": "cross-env NODE_ENV=test jest ./dist/server/app/modules/**/*.controller.test.js",
+    "unit:test": "cross-env NODE_ENV=test jest ./dist/server/app/database/*.test.js",
     "start": "node ./dist/server/main.js"
   },
   "author": "UltraRangers",

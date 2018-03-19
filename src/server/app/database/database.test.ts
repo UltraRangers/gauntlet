@@ -21,6 +21,10 @@ describe('unit test: database service', () => {
     await app.init();
   });
 
+  afterAll(async () => {
+    await databaseService.disconnect();
+  });
+
   it('should disconnect from database', async () => {
     await databaseService.disconnect();
   });
