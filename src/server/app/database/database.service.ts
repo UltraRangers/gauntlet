@@ -37,7 +37,7 @@ export class DatabaseService {
   }
 
   public async seed() {
-    const seedPath = process.cwd() + '/src/server/app/database/seeds';
+    const seedPath = process.cwd() + '/dist/server/app/database/seeds';
     const seedFiles = readdirSync(seedPath);
     const queue = [];
 

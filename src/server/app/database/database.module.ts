@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { Connection, createConnection, Repository } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
 import { DatabaseService } from './database.service';
 

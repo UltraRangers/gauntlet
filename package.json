@@ -11,6 +11,7 @@
     "migration:up": "typeorm migrations:run",
     "migration:down": "typeorm migrations:revert",
     "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/modules/**/*.controller.test.js",
+    "unit:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/database/*.test.js",
     "start": "node ./dist/server/main.js"
   },
   "author": "UltraRangers",
