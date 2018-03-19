@@ -9,8 +9,8 @@ Gauntlet is a Typescript server template based from the [ADR](https://github.com
 - Node 8.4.0 or higher (you can try to manage your versions using [nvm](https://github.com/creationix/nvm))
 
 ## Installing
-- git clone https://github.com/UltraRangers/gauntlet.git
-- npm install
+- `git clone https://github.com/UltraRangers/gauntlet.git`
+- `npm install`
 - Setup your database with the following
     - Create a database of your choice
     - In the `config/server/ormconfig.development.json`. Change the username, password and database name on your own. Each `ormconfig.json` is used by different environements. Change accordingly for the desired environment (dev, test, prod)
