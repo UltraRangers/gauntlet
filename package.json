@@ -2,14 +2,14 @@
   "name": "gauntlet",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/server/main.js",
   "scripts": {
     "test": "npm run e2e:test",
     "build": "npm run build:server && npm run build:client",
     "build:server": "rimraf ./dist/server && tsc --project ./src/server",
     "build:client": "rimraf ./dist/client && webpack --progress --colors",
     "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/modules/**/*.controller.test.js",
-    "start": "node ./dist/server/www/index.js"
+    "start": "node ./dist/server/main.js"
   },
   "author": "UltraRangers",
   "license": "ISC",
@@ -53,6 +53,7 @@
     "angular-router-loader": "^0.8.2",
     "angular2-template-loader": "^0.6.2",
     "chai": "^4.1.2",
+    "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
