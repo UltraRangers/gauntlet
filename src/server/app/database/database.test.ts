@@ -1,5 +1,3 @@
-import express = require('express');
-
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
@@ -7,8 +5,7 @@ import { DatabaseModule } from './database.module';
 import { DatabaseService } from './database.service';
 
 describe('unit test: database service', () => {
-  const server = express();
-  let app: INestApplication;
+  let nestApplication: INestApplication;
   let databaseService: DatabaseService;
 
   beforeAll(async () => {
@@ -16,9 +13,14 @@ describe('unit test: database service', () => {
       imports: [ DatabaseModule ]
     }).compile();
 
-    app = await module.createNestApplication(server);
-    databaseService = app.select(DatabaseModule).get(DatabaseService);
-    await app.init();
+    // create application instance
+    nestApplication = await module.createNestApplication();
+
+    // get application services
+    databaseService = nestApplication.select(DatabaseModule).get(DatabaseService);
+
+    // initialize app
+    await nestApplication.init();
   });
 
   afterAll(async () => {

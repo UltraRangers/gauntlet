@@ -1,32 +1,16 @@
 import { INestApplication } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { Application, Request, Response } from 'express';
 import { resolve } from 'path';
 
 import express = require('express');
 
-import { AppModule } from './app/app.module';
-
-export async function createNestApplication() {
-  const expressApp = express();
-  const nestApp = await NestFactory.create(AppModule, expressApp, {});
-  setupClient(expressApp);
-  applyNestApplicationSettings(nestApp);
-  return {
-    nestApp,
-    expressApp };
-}
-
-/**
- * Sets nest application settings which can be use for testing environment too.
- * @param nestApplication - Nest Application
- */
-export function applyNestApplicationSettings(nestApplication: INestApplication) {
+export async function setupNestApplication(nestApplication: INestApplication) {
   nestApplication.setGlobalPrefix('api');
 }
 
-function setupClient(expressApp: express.Application) {
-  expressApp.use(express.static(resolve(__dirname, '../../dist/client')));
-  expressApp.get('*', (request: express.Request, response: express.Response) => {
+export async function setupExpressApplication(expressApplication: Application) {
+  expressApplication.use(express.static(resolve(__dirname, '../../dist/client')));
+  expressApplication.get('*', (request: Request, response: Response) => {
     if (request.path.match(/\.(html|css|png|jpg|ttf|js|ico)$/)) {
       return response.status(404)
         .send('Not found');
