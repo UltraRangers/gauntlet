@@ -1,27 +1,37 @@
 import express = require('express');
 import request = require('supertest');
 
+import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { applyNestApplicationSettings } from '../../../setup';
+import { setupNestApplication } from '../../../setup';
 import { UsersModule } from './users.module';
 
 describe('GetUsersController', () => {
-  const server = express();
+  let expressApplication: express.Application;
+  let nestApplication: INestApplication;
+  let server: request.SuperTest<any>;
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [ UsersModule ]
     }).compile();
 
-    const app = await module.createNestApplication(server);
-    applyNestApplicationSettings(app);
-    await app.init();
+    // create application instance
+    expressApplication = express();
+    server = request(expressApplication);
+    nestApplication = await module.createNestApplication(expressApplication);
+
+    // setup application
+    setupNestApplication(nestApplication);
+
+    // get application services
+
+    // initialize app
+    await nestApplication.init();
   });
 
   it('should return 200 /api/users', () => {
-    return request(server)
-      .get('/api/users')
-      .expect(200);
+    return server.get('/api/users').expect(200);
   });
 });
