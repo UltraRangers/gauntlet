@@ -4,7 +4,7 @@ import request = require('supertest');
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { setupExpressApplication, setupNestApplication } from '../../../setup';
+import { setupNestApplication } from '../../../setup';
 import { UsersModule } from './users.module';
 
 describe('GetUsersController', () => {
@@ -23,7 +23,7 @@ describe('GetUsersController', () => {
     nestApplication = await module.createNestApplication(expressApplication);
 
     // setup application
-    setupExpressApplication(expressApplication);
+    // setupExpressApplication(expressApplication);
     setupNestApplication(nestApplication);
 
     // get application services
