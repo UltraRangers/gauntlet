@@ -23,7 +23,6 @@ describe('GetUsersController', () => {
     nestApplication = await module.createNestApplication(expressApplication);
 
     // setup application
-    // setupExpressApplication(expressApplication);
     setupNestApplication(nestApplication);
 
     // get application services
