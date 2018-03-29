@@ -11,6 +11,6 @@ try {
   config.cli = { migrationsDir: '/src/server/utils/migrations/' };  
 }
 
-if (process.env.NODE_ENV === 'docker' && process.env['DATABASE_HOST']) config.host = process.env['DATABASE_HOST'];
+if (process.env['DATABASE_HOST']) config.host = process.env['DATABASE_HOST'];
 
 module.exports = config;

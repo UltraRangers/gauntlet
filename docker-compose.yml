@@ -15,16 +15,15 @@ services:
           - postgres
   web:
     build: .
-    command: npm start
+    command: [sh, -c, "npm run build && npm start"]
     ports:
-      - "80:4000"
+      - "80:3000"
     volumes:
       - .:/usr/app
       - /usr/app/node_modules
     depends_on:
       - postgres
     environment:
-      - NODE_ENV=docker
       - DATABASE_HOST=postgres
     networks:
       myapp:
