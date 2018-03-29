@@ -1,0 +1,32 @@
+version: "2"
+networks:
+  myapp:
+
+services:
+  postgres:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_DB: gauntlet-docker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      myapp:
+        aliases:
+          - postgres
+  web:
+    build: .
+    command: npm start
+    ports:
+      - "80:4000"
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=docker
+      - DATABASE_HOST=postgres
+    networks:
+      myapp:
+        aliases:
+          - web
