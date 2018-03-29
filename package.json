@@ -2,14 +2,17 @@
   "name": "gauntlet",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/server/main.js",
   "scripts": {
     "test": "npm run e2e:test",
     "build": "npm run build:server && npm run build:client",
     "build:server": "rimraf ./dist/server && tsc --project ./src/server",
     "build:client": "rimraf ./dist/client && webpack --progress --colors",
     "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/modules/**/*.controller.test.js",
-    "start": "node ./dist/server/www/index.js"
+    "unit:test": "cross-env NODE_ENV=test jest ./services/database.service.test.js",
+    "migration:up": "typeorm migrations:run",
+    "migration:down": "typeorm migrations:revert",
+    "start": "node ./dist/server/main.js"
   },
   "author": "UltraRangers",
   "license": "ISC",
@@ -72,5 +75,8 @@
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
     "webpack-merge": "^4.1.2"
+  },
+  "jest": {
+    "rootDir": "./dist/server"
   }
 }

@@ -1,1 +1,2 @@
-console.log('testing common files');
+export * from './constants';
+export * from '../server/entities';
