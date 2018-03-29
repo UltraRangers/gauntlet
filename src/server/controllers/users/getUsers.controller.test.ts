@@ -3,7 +3,7 @@ import request = require('supertest');
 
 import { Test } from '@nestjs/testing';
 
-import { applyNestApplicationSettings } from '../../../setup';
+import { setupNestApplication } from '../../setup';
 import { UsersModule } from './users.module';
 
 describe('GetUsersController', () => {
@@ -15,7 +15,7 @@ describe('GetUsersController', () => {
     }).compile();
 
     const app = await module.createNestApplication(server);
-    applyNestApplicationSettings(app);
+    setupNestApplication(app);
     await app.init();
   });
 

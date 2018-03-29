@@ -4,13 +4,16 @@
   "description": "",
   "main": "./dist/server/main.js",
   "scripts": {
-    "test": "npm run e2e:test",
     "build": "npm run build:server && npm run build:client",
     "build:server": "rimraf ./dist/server && tsc --project ./src/server",
     "build:client": "rimraf ./dist/client && webpack --progress --colors",
+    "test": "npm run e2e:test",
     "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/modules/**/*.controller.test.js",
-    "start": "node ./dist/server/main.js",
-    "watch:client": "webpack --progress --watch"
+    "unit:test": "cross-env NODE_ENV=test jest ./services/database.service.test.js",
+    "migration:up": "typeorm migrations:run",
+    "migration:down": "typeorm migrations:revert",
+    "watch:client": "webpack --progress --watch",
+    "start": "node ./dist/server/main.js"
   },
   "author": "UltraRangers",
   "license": "ISC",
@@ -79,5 +82,8 @@
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
     "webpack-merge": "^4.1.2"
+  },
+  "jest": {
+    "rootDir": "./dist/server"
   }
 }

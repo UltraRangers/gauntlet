@@ -1,9 +1,24 @@
-import { createNestApplication } from './setup';
+import { NestFactory } from '@nestjs/core';
 
-async function start() {
+import express = require('express');
+
+import { AppModule } from './app.module';
+import { setupExpressApplication, setupNestApplication } from './setup';
+
+async function bootstrap() {
   const port = process.env.PORT || 3000;
-  const app = await createNestApplication();
-  await app.nestApp.listen(port, () => { console.log(`server listening at http://localhost:${port}`); });
+
+  // create application instance
+  const expressApplication = express();
+  const nestApplication = await NestFactory.create(AppModule, expressApplication, {});
+
+  // setup the application
+  setupExpressApplication(expressApplication);
+  setupNestApplication(nestApplication);
+
+  await nestApplication.init();
+  await nestApplication.listen(port);
+  console.log(`server listening at http://localhost:${port}`);
 }
 
-start();
+bootstrap();
