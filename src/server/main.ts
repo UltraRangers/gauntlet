@@ -1,25 +1,24 @@
-import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import express = require('express');
 
 import { AppModule } from './app.module';
+import { setupExpressApplication, setupNestApplication } from './setup';
 
-export async function createNestApplication() {
-  const expressApp = express();
-  const mainModule = AppModule;
-  const nestApp = await NestFactory.create(mainModule, expressApp, {});
-  applyNestApplicationSettings(nestApp);
-  return {
-    nestApp,
-    expressApp
-  };
+async function bootstrap() {
+  const port = process.env.PORT || 3000;
+
+  // create application instance
+  const expressApplication = express();
+  const nestApplication = await NestFactory.create(AppModule, expressApplication, {});
+
+  // setup the application
+  setupExpressApplication(expressApplication);
+  setupNestApplication(nestApplication);
+
+  await nestApplication.init();
+  await nestApplication.listen(port);
+  console.log(`server listening at http://localhost:${port}`);
 }
 
-/**
- * Sets nest application settings which can be use for testing environment too.
- * @param nestApplication - Nest Application
- */
-export function applyNestApplicationSettings(nestApplication: INestApplication) {
-  nestApplication.setGlobalPrefix('api');
-}
+bootstrap();
