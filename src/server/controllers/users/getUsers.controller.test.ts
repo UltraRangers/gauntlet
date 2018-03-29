@@ -3,7 +3,7 @@ import request = require('supertest');
 
 import { Test } from '@nestjs/testing';
 
-import { applyNestApplicationSettings } from '../../../main';
+import { applyNestApplicationSettings } from '../../main';
 import { UsersModule } from './users.module';
 
 describe('GetUsersController', () => {

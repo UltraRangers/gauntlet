@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 
 import express = require('express');
 
-import { AppModule } from './app/app.module';
+import { AppModule } from './app.module';
 
 export async function createNestApplication() {
   const expressApp = express();
@@ -12,7 +12,8 @@ export async function createNestApplication() {
   applyNestApplicationSettings(nestApp);
   return {
     nestApp,
-    expressApp };
+    expressApp
+  };
 }
 
 /**
