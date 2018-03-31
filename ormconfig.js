@@ -1,10 +1,10 @@
 const env = process.env.NODE_ENV || 'development';
 let config;
-try {
-  config = require(process.cwd() + `/config/server/ormconfig.${env}.json`);
+try {  
+  config = require(process.cwd() + `/config/server/ormconfig.${env}`);
 } catch (error) {
   // get the development config as the fallback
-  config = require(process.cwd() + `/config/server/ormconfig.development.json`);
+  config = require(process.cwd() + `/config/server/ormconfig.development`);
 } finally {
   config.entities = [ __dirname + '/dist/server/entities/*.entity.js' ];
   config.migrations = [ __dirname + '/dist/server/utils/migrations/*.js' ];
