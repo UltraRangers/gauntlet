@@ -13,7 +13,8 @@
     "migration:up": "typeorm migrations:run",
     "migration:down": "typeorm migrations:revert",
     "watch:client": "webpack --progress --watch",
-    "start": "node ./dist/server/main.js"
+    "start": "node ./dist/server/main.js",
+    "postinstall": "npm run build"
   },
   "author": "UltraRangers",
   "license": "ISC",
