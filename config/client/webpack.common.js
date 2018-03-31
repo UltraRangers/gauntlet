@@ -98,8 +98,15 @@ module.exports = {
         test: /\.scss$/,
         exclude: path.join(src.client, 'app'),
         use: ExtractTextPlugin.extract({
-          use: ['raw-loader', 'sass-loader']
-        })
+          use: ['raw-loader', {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                require('path').resolve(__dirname, 'node_modules')
+              ]
+            },
+          }]
+        }),
       }
     ]
   },
