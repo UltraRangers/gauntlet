@@ -21,6 +21,8 @@ describe('GetUsersController', () => {
     const app = await module.createNestApplication(server);
     databaseService = app.select(DatabaseModule).get(DatabaseService);
 
+    await databaseService.reset();
+
     setupNestApplication(app);
     await app.init();
   });
