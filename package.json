@@ -14,7 +14,7 @@
     "migration:down": "typeorm migrations:revert",
     "watch:client": "webpack --progress --watch",
     "start": "node ./dist/server/main.js",
-    "postinstall": "npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "author": "UltraRangers",
   "license": "ISC",
