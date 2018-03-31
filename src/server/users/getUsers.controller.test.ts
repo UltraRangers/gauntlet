@@ -3,15 +3,15 @@ import request = require('supertest');
 
 import { Test } from '@nestjs/testing';
 
-import { setupNestApplication } from '../../setup';
-import { UsersModule } from './users.module';
+import { setupNestApplication } from '../setup';
+import { UserModule } from './user.module';
 
 describe('GetUsersController', () => {
   const server = express();
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [ UsersModule ]
+      imports: [ UserModule ]
     }).compile();
 
     const app = await module.createNestApplication(server);

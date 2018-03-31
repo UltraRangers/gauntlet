@@ -8,7 +8,7 @@
     "build:server": "rimraf ./dist/server && tsc --project ./src/server",
     "build:client": "rimraf ./dist/client && webpack --progress --colors",
     "test": "npm run e2e:test",
-    "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/app/modules/**/*.controller.test.js",
+    "e2e:test": "cross-env NODE_ENV=test npm run build:server && jest ./dist/server/**/*.controller.test.js",
     "unit:test": "cross-env NODE_ENV=test jest ./services/database.service.test.js",
     "migration:up": "typeorm migrations:run",
     "migration:down": "typeorm migrations:revert",
