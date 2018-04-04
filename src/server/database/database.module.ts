@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { createConnection } from 'typeorm';
 
-import { ProviderTokens } from '../common';
-import { DatabaseService } from './common/database.service';
-import { RoleProvider } from './roles/role.provider';
-import { UserProvider } from './users/user.provider';
+import { ProviderTokens } from '../../common';
+import { RoleProvider } from '../roles/role.provider';
+import { UserProvider } from '../users/user.provider';
+import { DatabaseService } from './database.service';
 
 const databaseProviders = [
   {

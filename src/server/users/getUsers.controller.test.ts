@@ -6,8 +6,7 @@ import { Test } from '@nestjs/testing';
 import { setupNestApplication } from '../setup';
 import { UserModule } from './user.module';
 
-import { DatabaseService } from '../common/database.service';
-import { DatabaseModule } from '../database.module';
+import { DatabaseModule, DatabaseService } from '../database';
 
 describe('GetUsersController', () => {
   const server = express();

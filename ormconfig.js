@@ -6,7 +6,7 @@ try {
   // get the development config as the fallback
   config = require(process.cwd() + `/config/server/ormconfig.development`);
 } finally {
-  config.entities = [ __dirname + '/dist/server/entities/*.entity.js' ];
+  config.entities = [ __dirname + '/dist/server/**/*.entity.js' ];
   config.migrations = [ __dirname + '/dist/server/utils/migrations/*.js' ];
   config.cli = { migrationsDir: '/src/server/utils/migrations/' };  
 }

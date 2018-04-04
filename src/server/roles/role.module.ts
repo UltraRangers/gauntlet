@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { RoleProvider } from './role.provider';
 import { RoleService } from './role.service';
 
