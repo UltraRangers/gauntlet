@@ -1,8 +1,5 @@
 export enum ProviderTokens {
-  ROOT_CONNECTION = 'DB_CONNECTION_TOKEN',
-  ROLE_CONNECTION = 'RoleRepositoryToken',
-  USER_CONNECTION = 'UserRepositoryToken',
-  TEST = 'Test'
+  ROOT_CONNECTION = 'DB_CONNECTION_TOKEN'
 }
 
 export enum Tables {

@@ -1,6 +1,5 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 
-import { ProviderTokens } from '../../common';
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 
@@ -9,7 +8,7 @@ export class GetUsersController {
 
   constructor(
     private readonly userService: UserService,
-    @Inject(ProviderTokens.USER_CONNECTION) private readonly userRepository: UserRepository
+    @Inject(UserRepository) private readonly userRepository: UserRepository
   ) {}
 
   @Get()
