@@ -9,4 +9,4 @@ import { RoleService } from './role.service';
     RoleService
   ]
 })
-export class AppModule {}
+export class RoleModule {}
