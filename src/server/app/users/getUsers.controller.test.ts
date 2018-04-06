@@ -3,7 +3,7 @@ import request = require('supertest');
 
 import { Test } from '@nestjs/testing';
 
-import { setupNestApplication } from '../setup';
+import { setupNestApplication } from '../../setup';
 import { UserModule } from './user.module';
 
 import { DatabaseModule, DatabaseService } from '../database';

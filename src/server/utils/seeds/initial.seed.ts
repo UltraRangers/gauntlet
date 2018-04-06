@@ -1,7 +1,7 @@
 import { Connection } from 'typeorm';
 
-import { Role, RoleRepository } from '../../roles';
-import { User, UserRepository } from '../../users';
+import { Role, RoleRepository } from '../../app/roles';
+import { User, UserRepository } from '../../app/users';
 
 export class InitialSeed {
 

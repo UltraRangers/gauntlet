@@ -1,7 +1,7 @@
 import { Connection, createConnection, getMetadataArgsStorage } from 'typeorm';
 import { EntityRepositoryMetadataArgs } from 'typeorm/metadata-args/EntityRepositoryMetadataArgs';
 
-import { ProviderTokens } from '../../common';
+import { ProviderTokens } from '../../../common';
 
 /**
  * Todo: Load repositories in a nice way
