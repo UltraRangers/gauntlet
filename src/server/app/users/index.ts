@@ -1,5 +1,5 @@
 export * from './user.module';
-export * from './getUsers.controller';
+export * from './user.controller';
 export * from './user.service';
 export * from './user.repository';
 

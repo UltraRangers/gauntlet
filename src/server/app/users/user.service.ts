@@ -5,7 +5,7 @@ import { UserRepository } from './user.repository';
 @Component()
 export class UserService {
 
-  public constructor(
+  constructor(
     @Inject(UserRepository) private readonly userRepository: UserRepository
   ) {}
 

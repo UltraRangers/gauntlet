@@ -8,7 +8,7 @@ import { UserModule } from './user.module';
 
 import { DatabaseModule, DatabaseService } from '../database';
 
-describe('GetUsersController', () => {
+describe('UserController', () => {
   const server = express();
   let databaseService: DatabaseService;
 
