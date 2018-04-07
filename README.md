@@ -1,5 +1,6 @@
 # Gauntlet 
-Gauntlet is a Typescript server template based from the [ADR](https://github.com/pmjones/adr-example) design pattern.
+Gauntlet is a Typescript server template to kick-off your development fast 🔥🔥🔥
+
 Demo site: [https://gauntlet-demo.herokuapp.com](https://gauntlet-demo.herokuapp.com/)
 
 ## Build Status
