@@ -1,12 +1,7 @@
 import { Connection } from 'typeorm';
 
-// Database entities
-import { Role } from '../../entities/role.entity';
-import { User } from '../../entities/user.entity';
-
-// Database repositories
-import { RoleRepository } from '../../repositories/role.repository';
-import { UserRepository } from '../../repositories/user.repository';
+import { Role, RoleRepository } from '../../app/roles';
+import { User, UserRepository } from '../../app/users';
 
 export class InitialSeed {
 

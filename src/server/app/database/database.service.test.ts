@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
-import { DatabaseModule } from '../database.module';
+import { DatabaseModule } from './database.module';
 import { DatabaseService } from './database.service';
 
 describe('unit test: database service', () => {

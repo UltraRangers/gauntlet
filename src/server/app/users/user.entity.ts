@@ -1,6 +1,7 @@
 import { IsArray, IsBoolean, IsDate, IsEmail, IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from './role.entity';
+
+import { Role } from '../roles/role.entity';
 
 @Entity()
 export class User {

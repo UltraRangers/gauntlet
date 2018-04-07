@@ -48,6 +48,11 @@ module.exports = {
         test: /\.html$/,
         use: ['html-loader']
       },
+      // pug loader
+      {
+        test: /\.pug$/,
+        use: ['html-loader', 'pug-html-loader?doctype=html']
+      },
       // static assets
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
@@ -67,6 +72,21 @@ module.exports = {
         include: path.join(src.client, 'app'),
         loader: 'raw-loader'
       },
+      // stylus loader and inject into components
+      {
+        test: /\.styl$/,
+        include: path.join(src.client, 'app'),
+        use: ['css-to-string-loader', 'css-loader', 'stylus-relative-loader']
+      },
+      // stylus global which not include in components
+      {
+        test: /\.styl$/,
+        exclude: path.join(src.client, 'app'),
+        use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: ['css-loader', 'stylus-relative-loader']
+        })
+      },
       // sass loader and inject into components     
       {
         test: /\.scss$/,
@@ -78,8 +98,15 @@ module.exports = {
         test: /\.scss$/,
         exclude: path.join(src.client, 'app'),
         use: ExtractTextPlugin.extract({
-          use: ['raw-loader', 'sass-loader']
-        })
+          use: ['raw-loader', {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                require('path').resolve(__dirname, 'node_modules')
+              ]
+            },
+          }]
+        }),
       }
     ]
   },
