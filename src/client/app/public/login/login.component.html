@@ -1,0 +1,11 @@
+<section class="section">
+  <form [formGroup]="loginForm">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <button mat-raised-button type="button" (click)="onClickLogin()">Login</button>
+  </form>  
+</section>
