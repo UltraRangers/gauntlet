@@ -1,7 +1,8 @@
 import { Component, Inject, UnauthorizedException } from '@nestjs/common';
 
 import { BcryptService, JsonWebTokenService } from '../core';
-import { User, UserRepository } from './';
+import { User } from './user.entity';
+import { UserRepository } from './user.repository';
 
 @Component()
 export class UserService {
