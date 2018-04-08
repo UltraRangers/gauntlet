@@ -6,10 +6,10 @@ import { UserService } from './user.service';
 @Controller('/users')
 export class UserController {
 
-  public constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
   @Post('login')
-  public async login(
+  public login(
     @Body('email') email: string,
     @Body('password') password: string
   ): Promise<{ user: User, token: string }> {
