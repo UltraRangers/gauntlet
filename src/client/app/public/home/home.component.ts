@@ -10,7 +10,7 @@ import { DialogService, ListColumn } from '../../shared';
 
 export class HomeComponent implements OnInit {
 
-  public constructor(
+  constructor(
     private dialogService: DialogService
   ) { }
 

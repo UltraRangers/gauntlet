@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 @Injectable()
 export class DialogService {
 
-  public constructor(
+  constructor(
     private dialog: MatDialog
   ) { }
 
