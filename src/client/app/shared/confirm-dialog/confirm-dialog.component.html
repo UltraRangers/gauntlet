@@ -1,0 +1,10 @@
+<section>
+  <mat-dialog-content>
+    <p>{{ data?.title }}</p>
+    <p>{{ data?.content }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onConfirm()">Confirm</button>
+  </mat-dialog-actions>
+</section>

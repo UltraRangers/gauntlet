@@ -44,6 +44,7 @@
     "glob": "^7.1.2",
     "jsonwebtoken": "^8.2.0",
     "lodash": "^4.17.5",
+    "normalize-scss": "^7.0.1",
     "pg": "^7.4.1",
     "rxjs": "^5.5.7",
     "stylus-relative-loader": "^3.4.0",
