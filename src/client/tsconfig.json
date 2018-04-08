@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
+    "noUnusedLocals": false,
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
