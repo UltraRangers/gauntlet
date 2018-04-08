@@ -10,7 +10,7 @@ export async function setupNestApplication(nestApplication: INestApplication) {
 
 export async function setupExpressApplication(expressApplication: Application) {
   expressApplication.use(express.static(resolve(__dirname, '../../dist/client')));
-  expressApplication.get('/', (request: Request, response: Response) => {
+  expressApplication.get('*', (request: Request, response: Response) => {
     if (request.path.match(/\.(html|css|png|jpg|ttf|js|ico)$/)) {
       return response.status(404)
         .send('Not found');

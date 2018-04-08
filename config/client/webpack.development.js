@@ -11,6 +11,8 @@ const webpackCommon = require('./webpack.common');
 module.exports = webpackMerge(webpackCommon, {
   devtool: 'inline-source-map',
 
+  mode: 'development',
+
   output: {
     path: dist.client,
     publicPath: '',

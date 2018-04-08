@@ -1,0 +1,75 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-teal: (
+    50 : #e0f2f1,
+    100 : #b3e0db,
+    200 : #80cbc4,
+    300 : #4db6ac,
+    400 : #26a69a,
+    500 : #009688,
+    600 : #008e80,
+    700 : #008375,
+    800 : #00796b,
+    900 : #006858,
+    A100 : #97ffec,
+    A200 : #64ffe3,
+    A400 : #31ffda,
+    A700 : #18ffd5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-yellow: (
+    50 : #fffde7,
+    100 : #fff9c4,
+    200 : #fff59d,
+    300 : #fff176,
+    400 : #ffee58,
+    500 : #ffeb3b,
+    600 : #ffe935,
+    700 : #ffe52d,
+    800 : #ffe226,
+    900 : #ffdd19,
+    A100 : #ffffff,
+    A200 : #fffffd,
+    A400 : #fff7ca,
+    A700 : #fff2b1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$app-primary: mat-palette($mat-teal); 
+$app-accent:  mat-palette($mat-yellow);
+
+$app-theme: mat-light-theme($app-primary, $app-accent);
+
+@include angular-material-theme($app-theme);

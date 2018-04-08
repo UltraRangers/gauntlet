@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CoreModule } from './core';
+
 import { AppComponent } from './app.component';
-import { AppRoutes } from './app.routes';
-import { SharedModule } from './common/shared.module';
-import { MaterialModule } from './material.module';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutes,
-    MaterialModule,
-    SharedModule.forRoot()
+    HttpModule,
+    CoreModule,
+    AppRoutingModule
   ],
   exports: [],
   declarations: [
