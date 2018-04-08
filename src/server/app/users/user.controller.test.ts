@@ -1,15 +1,19 @@
 import express = require('express');
-import request = require('supertest');
+import supertest = require('supertest');
 
+import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { expect } from 'chai';
 
 import { setupNestApplication } from '../../setup';
+import { DatabaseModule, DatabaseService } from '../database';
 import { UserModule } from './user.module';
 
-import { DatabaseModule, DatabaseService } from '../database';
-
 describe('UserController', () => {
-  const server = express();
+  const expressServer = express();
+  const server: supertest.SuperTest<any> = supertest(expressServer);
+
+  let app: INestApplication;
   let databaseService: DatabaseService;
 
   beforeAll(async () => {
@@ -17,22 +21,57 @@ describe('UserController', () => {
       imports: [ UserModule ]
     }).compile();
 
-    const app = await module.createNestApplication(server);
+    app = await module.createNestApplication(expressServer);
     databaseService = app.select(DatabaseModule).get(DatabaseService);
-
-    await databaseService.reset();
 
     setupNestApplication(app);
     await app.init();
+    await databaseService.reset();
+    await databaseService.seed();
   });
 
   afterAll(async () => {
     await databaseService.disconnect();
   });
 
-  it('should return 200 /api/users', () => {
-    return request(server)
-      .get('/api/users')
-      .expect(200);
+  describe('login', async () => {
+    it('should not login user with non existent email', async () => {
+      const data = {
+        email: `non-existent@test.com`,
+        password: `test`
+      };
+      const response = await server.post('/api/users/login').send(data);
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.have.property('statusCode', 401);
+      expect(response.body).to.have.property('error', 'Unauthorized');
+    });
+    it('should not login user with invalid password', async () => {
+      const data = {
+        email: `admin@test.com`,
+        password: `invalidpassword`
+      };
+      const response = await server.post('/api/users/login').send(data);
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.have.property('statusCode', 401);
+      expect(response.body).to.have.property('error', 'Unauthorized');
+    });
+    it('should login user with valid credentials', async () => {
+      const data = {
+        email: `admin@test.com`,
+        password: `test`
+      };
+      const response = await server.post('/api/users/login').send(data);
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.have.property('user');
+      expect(response.body).to.have.property('token');
+    });
+  });
+
+  describe('getUsers', async () => {
+    it('should return 200 /api/users', () => {
+      return server
+        .get('/api/users')
+        .expect(200);
+    });
   });
 });
