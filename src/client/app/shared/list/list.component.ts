@@ -41,7 +41,7 @@ export class ListComponent implements AfterViewInit, OnChanges, OnInit {
   public ngOnInit() { }
 
   public ngOnChanges() {
-    this.setDatasource();
+    this.setDataSource();
     this.setConfig();
   }
 
@@ -53,11 +53,11 @@ export class ListComponent implements AfterViewInit, OnChanges, OnInit {
     this.dataSource.filter = data.trim().toLowerCase();
   }
 
-  public findDeep(object: any, path: string): any {
+  public getItem(object: any, path: string): any {
     return get(object, path);
   }
 
-  private setDatasource() {
+  private setDataSource() {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

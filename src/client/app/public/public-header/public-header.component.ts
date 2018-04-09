@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class PublicHeaderComponent implements OnInit {
+
   constructor() { }
 
   public ngOnInit() { }

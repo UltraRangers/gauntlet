@@ -13,16 +13,13 @@ export class UserService {
     private readonly bcryptService: BcryptService
   ) {}
 
-  public async login(data: {
-    email: string,
-    password: string
-  }): Promise<{ user: User, token: string }> {
-    const user = await this.userRepository.getUserByEmail(data.email);
+  public async login(email: string, password: string): Promise<{ user: User, token: string }> {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       throw new UnauthorizedException();
     }
-    const isPasswordRight = await this.bcryptService.compareHash(data.password, user.password);
-    if (!isPasswordRight) {
+    const isValidPassword = await this.bcryptService.compareHash(password, user.password);
+    if (!isValidPassword) {
       throw new UnauthorizedException();
     }
     const token = this.jwtService.sign({

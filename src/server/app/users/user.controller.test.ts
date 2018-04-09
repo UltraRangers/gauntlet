@@ -40,27 +40,32 @@ describe('UserController', () => {
         email: `non-existent@test.com`,
         password: `test`
       };
-      const response = await server.post('/api/users/login').send(data);
+      const response = await server
+        .post('/api/users/login')
+        .send(data)
+        .expect(401);
       expect(response.body).to.be.an('object');
-      expect(response.body).to.have.property('statusCode', 401);
-      expect(response.body).to.have.property('error', 'Unauthorized');
     });
     it('should not login user with invalid password', async () => {
       const data = {
         email: `admin@test.com`,
         password: `invalidpassword`
       };
-      const response = await server.post('/api/users/login').send(data);
+      const response = await server
+        .post('/api/users/login')
+        .send(data)
+        .expect(401);
       expect(response.body).to.be.an('object');
-      expect(response.body).to.have.property('statusCode', 401);
-      expect(response.body).to.have.property('error', 'Unauthorized');
     });
     it('should login user with valid credentials', async () => {
       const data = {
         email: `admin@test.com`,
         password: `test`
       };
-      const response = await server.post('/api/users/login').send(data);
+      const response = await server
+        .post('/api/users/login')
+        .send(data)
+        .expect(201);
       expect(response.body).to.be.an('object');
       expect(response.body).to.have.property('user');
       expect(response.body).to.have.property('token');

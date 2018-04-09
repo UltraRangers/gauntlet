@@ -15,7 +15,7 @@
         <div *ngIf="!column.sortable">
           <mat-header-cell *matHeaderCellDef> {{ column.title }} </mat-header-cell>
         </div>
-        <mat-cell *matCellDef="let element" (click)="onClickRow.emit(element)"> {{ findDeep(element, column.value) }} </mat-cell>
+        <mat-cell *matCellDef="let element" (click)="onClickRow.emit(element)"> {{ getItem(element, column.value) }} </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
