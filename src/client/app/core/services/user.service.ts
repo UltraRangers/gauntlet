@@ -29,17 +29,17 @@ export class UserService {
     email: string,
     password: string
   }): Observable<{ user: User, token: string }> {
-    return this.apiService.post('/users/login', data).do((data: {
-      user: User,
-      token: string
-    }) => {
-      this.currentUserSource.next(data.user);
-      console.log(data.user);
-      this.apiService.setAccessToken(data.token);
-    }, (error: Error) => {
-      this.currentUserSource.next(null);
-      this.apiService.setAccessToken(null);
-    });
+    return this.apiService.post('/users/login', data)
+      .do((data: {
+        user: User,
+        token: string
+      }) => {
+        this.currentUserSource.next(data.user);
+        this.apiService.setAccessToken(data.token);
+      }, (error: Error) => {
+        this.currentUserSource.next(null);
+        this.apiService.setAccessToken(null);
+      });
   }
 
   public logout() {
@@ -49,12 +49,12 @@ export class UserService {
   }
 
   public getMe(): Observable<User> {
-    return this.apiService.get(`/users/me`).do((user: User) => {
-      this.currentUserSource.next(user);
-      console.log(user);
-    }, (error: Error) => {
-      this.currentUserSource.next(null);
-      this.apiService.setAccessToken(null);
-    });
+    return this.apiService.get(`/users/me`)
+      .do((user: User) => {
+        this.currentUserSource.next(user);
+      }, (error: Error) => {
+        this.currentUserSource.next(null);
+        this.apiService.setAccessToken(null);
+      });
   }
 }
