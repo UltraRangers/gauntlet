@@ -13,7 +13,7 @@ export class UserController {
     @Body('email') email: string,
     @Body('password') password: string
   ): Promise<{ user: User, token: string }> {
-    return this.userService.login(email, password);
+    return this.userService.login({email, password});
   }
 
   @Get()

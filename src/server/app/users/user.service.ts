@@ -13,12 +13,12 @@ export class UserService {
     private readonly bcryptService: BcryptService
   ) {}
 
-  public async login(email: string, password: string): Promise<{ user: User, token: string }> {
-    const user = await this.userRepository.getUserByEmail(email);
+  public async login(data: {email: string, password: string}): Promise<{ user: User, token: string }> {
+    const user = await this.userRepository.getUserByEmail(data.email);
     if (!user) {
       throw new UnauthorizedException();
     }
-    const isValidPassword = await this.bcryptService.compareHash(password, user.password);
+    const isValidPassword = await this.bcryptService.compareHash(data.password, user.password);
     if (!isValidPassword) {
       throw new UnauthorizedException();
     }

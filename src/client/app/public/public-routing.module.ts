@@ -4,13 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { PublicComponent } from './public.component';
 
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PublicComponent,
     children: [
-      { path: '', component: HomeComponent }
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent }
     ]
   }
 ];
@@ -23,5 +25,6 @@ export class PublicRoutingModule { }
 
 export const routedComponents = [
   PublicComponent,
-  HomeComponent
+  HomeComponent,
+  LoginComponent
 ];
