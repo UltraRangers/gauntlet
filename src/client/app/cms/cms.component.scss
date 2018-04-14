@@ -1,0 +1,19 @@
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+}
+
+mat-sidenav {
+  width: 240px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
+}
+
+section.cms-container {
+  width: 90%;
+  min-height: 100vh;
+  margin: 0 auto;
+}

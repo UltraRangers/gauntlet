@@ -1,0 +1,12 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <cms-sidenav></cms-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <cms-header></cms-header>
+    <section class="cms-container">
+      <router-outlet></router-outlet>          
+    </section>
+    <cms-footer></cms-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

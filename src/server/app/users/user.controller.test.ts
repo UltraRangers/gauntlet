@@ -5,9 +5,10 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { expect } from 'chai';
 
+import { AppModule } from '../../app.module';
 import { setupNestApplication } from '../../setup';
 import { DatabaseModule, DatabaseService } from '../database';
-import { UserModule } from './user.module';
+// import { UserModule } from './user.module';
 
 describe('UserController', () => {
   const expressServer = express();
@@ -18,7 +19,9 @@ describe('UserController', () => {
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [ UserModule ]
+      imports: [
+        AppModule
+      ]
     }).compile();
 
     app = await module.createNestApplication(expressServer);

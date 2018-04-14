@@ -51,6 +51,7 @@ export class UserService {
   public getMe(): Observable<User> {
     return this.apiService.get(`/users/me`)
       .do((user: User) => {
+        console.log('current user', user);
         this.currentUserSource.next(user);
       }, (error: Error) => {
         this.currentUserSource.next(null);
