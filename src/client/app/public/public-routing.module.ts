@@ -5,6 +5,7 @@ import { PublicComponent } from './public.component';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
     component: PublicComponent,
     children: [
       { path: '', component: LoginComponent },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'reset-password', component: ResetPasswordComponent }
     ]
   }
 ];
@@ -26,5 +28,6 @@ export class PublicRoutingModule { }
 export const routedComponents = [
   PublicComponent,
   HomeComponent,
-  LoginComponent
+  LoginComponent,
+  ResetPasswordComponent
 ];
