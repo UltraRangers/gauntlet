@@ -27,6 +27,8 @@ header {
 }
 
 .links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   justify-self: right;
   margin-right: 20px;
 }
