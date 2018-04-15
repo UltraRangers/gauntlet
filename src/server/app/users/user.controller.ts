@@ -20,4 +20,9 @@ export class UserController {
   public getUsers() {
     return this.userService.getUsers();
   }
+
+  @Get('/me')
+  public getMe() {
+    return { status: 'ok' };
+  }
 }

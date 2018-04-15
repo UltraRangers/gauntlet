@@ -11,8 +11,8 @@ const routes: Routes = [
     path: '',
     component: PublicComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent }
+      { path: '', component: LoginComponent },
+      { path: 'home', component: HomeComponent }
     ]
   }
 ];
