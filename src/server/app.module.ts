@@ -1,6 +1,6 @@
 import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 
-import { versionMiddleware } from './app/core';
+import { VersionMiddleware } from './app/core';
 
 import { UserModule } from './app/users';
 
@@ -13,7 +13,9 @@ import { UserModule } from './app/users';
 export class AppModule implements NestModule {
   public configure(consumer: MiddlewaresConsumer): void {
     consumer
-      .apply(versionMiddleware)
+      .apply([
+        VersionMiddleware
+      ])
       .forRoutes({
         path: '*',
         method: RequestMethod.ALL
