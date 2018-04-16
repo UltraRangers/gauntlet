@@ -1,6 +1,6 @@
 import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 
-import { AccessTokenMiddleware } from './app/core/middlewares/access-token.middleware';
+import { AccessTokenMiddleware, VersionMiddleware } from './app/core';
 
 import { UserModule } from './app/users';
 
@@ -11,19 +11,11 @@ import { UserModule } from './app/users';
   components: []
 })
 export class AppModule implements NestModule {
-
-  public configure(consumer: MiddlewaresConsumer) {
+  public configure(consumer: MiddlewaresConsumer): void {
     consumer
-      // .apply((req, res, next) => {
-      //   console.log('asdsa111d');
-      //   next();
-      // })
       .apply([
-        (req, res, next) => {
-          console.log('test');
-          next();
-        },
-        AccessTokenMiddleware
+        AccessTokenMiddleware,
+        VersionMiddleware
       ])
       .forRoutes({
         path: '*',
