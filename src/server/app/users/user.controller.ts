@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+
+import { CurrentUser } from '../core';
 
 import { User } from './user.entity';
 import { UserService } from './user.service';
@@ -16,11 +18,11 @@ export class UserController {
     return this.userService.login({email, password});
   }
 
-  @Get(':id')
-  public getUserById(
-    @Param('id') id: number
+  @Get('me')
+  public getMe(
+    @CurrentUser() currentUser: User
   ): Promise<User> {
-    return this.userService.getUserById(id);
+    return this.userService.getUserById(currentUser.id);
   }
 
   @Get()

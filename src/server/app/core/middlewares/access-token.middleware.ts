@@ -1,5 +1,5 @@
 import { ExpressMiddleware, Middleware, NestMiddleware } from '@nestjs/common';
-import { JsonWebTokenService } from '..';
+import { JsonWebTokenService } from '../services/jsonwebtoken.service';
 
 @Middleware()
 export class AccessTokenMiddleware implements NestMiddleware {
@@ -10,13 +10,7 @@ export class AccessTokenMiddleware implements NestMiddleware {
 
   public resolve(...args: any[]): ExpressMiddleware {
     return (request, response, next) => {
-      const headers = request.headers;
-      const accessToken = headers.accessToken || headers['x-access-token'];
-      console.log(accessToken);
-      const user = this.jwtService.verify(accessToken);
-      if (user) {
-        request.user = user;
-      }
+      request.user = this.jwtService.verify(request.headers['X-Access-Token']);
       next();
     };
   }

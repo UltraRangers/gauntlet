@@ -1,11 +1,12 @@
 import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 
-import { AccessTokenMiddleware, VersionMiddleware } from './app/core';
+import { AccessTokenMiddleware, CoreModule, VersionMiddleware } from './app/core';
 
 import { UserModule } from './app/users';
 
 @Module({
   imports: [
+    CoreModule,
     UserModule
   ],
   components: []
