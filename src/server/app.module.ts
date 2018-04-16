@@ -1,4 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+
+import { VersionMiddleware } from './app/core';
 
 import { UserModule } from './app/users';
 
@@ -8,4 +10,15 @@ import { UserModule } from './app/users';
   ],
   components: []
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  public configure(consumer: MiddlewaresConsumer): void {
+    consumer
+      .apply([
+        VersionMiddleware
+      ])
+      .forRoutes({
+        path: '*',
+        method: RequestMethod.ALL
+      });
+  }
+}
