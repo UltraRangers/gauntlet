@@ -86,7 +86,7 @@ describe('UserController', () => {
       });
       const response = await server
         .get('/api/users/me')
-        .set('X-Access-Token', data.token)
+        .set('x-access-token', data.token)
         .expect(200);
       expect(response.body).to.be.an('object');
       expect(response.body).to.have.property('id', data.user.id);

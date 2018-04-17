@@ -10,7 +10,7 @@ export class AccessTokenMiddleware implements NestMiddleware {
 
   public resolve(...args: any[]): ExpressMiddleware {
     return (request, response, next) => {
-      request.user = this.jwtService.verify(request.headers['X-Access-Token']);
+      request.user = this.jwtService.verify(request.headers['x-access-token']);
       next();
     };
   }
