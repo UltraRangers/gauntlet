@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CurrentUserGuard } from '../core';
+
 import { CmsComponent } from './cms.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CmsComponent,
-    children: [
-    ]
+    canActivate: [CurrentUserGuard],
+    children: []
   }
 ];
 

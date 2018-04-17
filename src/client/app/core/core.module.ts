@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { CurrentUserGuard } from './guards/current-user.guard';
+
 import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
 
@@ -12,7 +14,8 @@ import { UserService } from './services/user.service';
   declarations: [],
   providers: [
     ApiService,
-    UserService
+    UserService,
+    CurrentUserGuard
   ]
 })
 export class CoreModule { }
