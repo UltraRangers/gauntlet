@@ -79,6 +79,11 @@ describe('UserController', () => {
   });
 
   describe('getMe', async () => {
+    it('should return 403 with no access token', async () => {
+      await server
+        .get('/api/users/me')
+        .expect(403);
+    });
     it('should return current user', async () => {
       const data = await userService.login({
         email: `admin@test.com`,
