@@ -1,0 +1,26 @@
+@import '../../../stylesheets/palette.scss';
+
+.logo {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background-color: $primary-color;
+  
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+}
+
+mat-list {
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a.active, a:hover {
+    background-color: rgba($color: #000000, $alpha: 0.2);
+  }
+}

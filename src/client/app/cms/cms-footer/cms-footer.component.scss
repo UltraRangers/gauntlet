@@ -1,0 +1,13 @@
+@import '../../../stylesheets/palette.scss';
+
+section.footer {
+  padding: 20px;
+  color: white;
+  background-color: $primary-color;
+}
+
+section.footer-credit {
+  padding: 20px;
+  color: white;
+  background-color: $primary-color-dark;
+}

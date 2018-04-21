@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   private login(data: {email: string, password: string}) {
     this.userService.login(data).subscribe((data) => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/cms');
       this.dialogService.openAlertDialog({
         title: 'Success',
         content: 'You are now login'

@@ -78,7 +78,7 @@ export class ApiService {
     };
 
     if (this.accessToken) {
-      headers.Authorization = this.accessToken;
+      headers['x-access-token'] = this.accessToken;
     }
 
     return headers;

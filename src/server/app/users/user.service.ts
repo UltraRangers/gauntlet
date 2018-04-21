@@ -30,6 +30,12 @@ export class UserService {
     return { user, token };
   }
 
+  public getUserById(id: number): Promise<User> {
+    return this.userRepository.findOneById(id, {
+      relations: ['roles']
+    });
+  }
+
   public async getUsers() {
     return this.userRepository.getUsers({});
   }

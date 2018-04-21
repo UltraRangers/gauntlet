@@ -9,6 +9,11 @@ export class JsonWebTokenService {
   }
 
   public verify(token: any) {
-    return verify(token, 'secret');
+    try {
+      const data = verify(token, 'secret');
+      return data;
+    } catch (error) {
+      return;
+    }
   }
 }
