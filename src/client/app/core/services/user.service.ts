@@ -58,4 +58,11 @@ export class UserService {
         this.apiService.setAccessToken(null);
       });
   }
+
+  public updateProfile(data: User): Observable<User> {
+    return this.apiService.put(`/users/profile`, data)
+      .do((user: User) => {
+        console.log('updated current user', user);
+      });
+  }
 }

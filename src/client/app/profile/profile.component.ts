@@ -21,10 +21,17 @@ export class ProfileComponent implements OnInit {
     private userService: UserService
   ) { }
 
+  // interface methods
   public ngOnInit() {
     this.loadProfile();
     this.buildProfileForm();
     this.patchProfileFormValue(this.user);
+  }
+
+  // event methods
+  public onClickUpdate() {
+    const data = this.profileForm.getRawValue();
+    this.updateProfile(data);
   }
 
   private loadProfile() {
@@ -43,5 +50,16 @@ export class ProfileComponent implements OnInit {
     this.profileForm.patchValue({
       email: user.email
     });
+  }
+
+  private updateProfile(data: User) {
+    this.userService
+      .updateProfile(data)
+      .subscribe((user: User) => {
+        this.user = user;
+        this.patchProfileFormValue(this.user);
+      }, (error: Error) => {
+        console.log(error);
+      });
   }
 }
