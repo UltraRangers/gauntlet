@@ -4,7 +4,7 @@ import { join } from 'path';
 @Component()
 export class ConfigService {
 
-  public getConfigByFilename(filename: string) {
+  public getConfig(filename: string) {
     let path = this.getConfigPath();
     try {
       path = join(this.getConfigPath(), `${filename}.${process.env.NODE_ENV}`);

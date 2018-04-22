@@ -24,16 +24,16 @@ describe('unit test: Config Service', () => {
   });
 
   it('should get ormconfig with exact path', () => {
-    const config = configService.getConfigByFilename('ormconfig.development.json');
+    const config = configService.getConfig('ormconfig.development.json');
     expect(Object.keys(config).length).toBeGreaterThan(1);
   });
 
   it('should get ormconfig without specifiying the environment', () => {
-    const config = configService.getConfigByFilename('ormconfig');
+    const config = configService.getConfig('ormconfig');
     expect(Object.keys(config).length).toBeGreaterThan(1);
   });
 
   it('should throw an error for a non existing file', () => {
-    expect(() => configService.getConfigByFilename('non-existing-file')).toThrow();
+    expect(() => configService.getConfig('non-existing-file')).toThrow();
   });
 });

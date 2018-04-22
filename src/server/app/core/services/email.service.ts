@@ -38,7 +38,7 @@ export class EmailService {
 
   private loadEmailConfig() {
     try {
-      this.config = this.configService.getConfigByFilename('email-config');
+      this.config = this.configService.getConfig('email-config');
     } catch (error) {
       console.log('error loading config');
     }
