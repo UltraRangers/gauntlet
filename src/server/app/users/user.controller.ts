@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Put } from '@nestjs/common';
 
 import { AccessTokenGuard, CurrentUser } from '../core';
 
@@ -29,5 +29,15 @@ export class UserController {
   @Get()
   public getUsers() {
     return this.userService.getUsers();
+  }
+
+  @Put('profile')
+  @UseGuards(AccessTokenGuard)
+  public async updateProfile(
+    @CurrentUser() currentUser: User,
+    @Body() user: User
+  ): Promise<User> {
+    await this.userService.updateProfileById(currentUser.id, user);
+    return this.userService.getUserById(currentUser.id);
   }
 }

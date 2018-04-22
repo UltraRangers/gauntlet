@@ -1,0 +1,7 @@
+<h3>Profile</h3>
+<form [formGroup]="profileForm">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Email" formControlName="email">
+  </mat-form-field>
+  <button mat-raised-button type="button" (click)="onClickUpdate()">Update</button>
+</form>

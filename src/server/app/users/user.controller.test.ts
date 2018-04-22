@@ -105,4 +105,20 @@ describe('UserController', () => {
         .expect(200);
     });
   });
+
+  describe.only('updateProfileById', async () => {
+    it('should update current user, /api/users/profile', async () => {
+      const data = await userService.login({
+        email: `admin@test.com`,
+        password: `test`
+      });
+      const response = await server
+        .put('/api/users/profile')
+        .set('x-access-token', data.token)
+        .send({
+          email: 'updated-admin@test.com'
+        });
+      expect(response.body).to.have.property('email', 'updated-admin@test.com');
+    });
+  });
 });

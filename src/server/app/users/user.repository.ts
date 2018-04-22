@@ -22,8 +22,14 @@ export class UserRepository extends Repository<User> {
 
   public async getUserByEmail(email: string): Promise<User> {
     return this.findOne({
-      where: { email }
+      where: { email },
+      relations: ['roles']
     });
+  }
+
+  public updateUserById(id: number, data: User): Promise<void> {
+    delete data.created;
+    return this.updateById(id, data);
   }
 
 }

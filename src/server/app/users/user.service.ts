@@ -1,4 +1,5 @@
 import { Component, Inject, UnauthorizedException } from '@nestjs/common';
+import { classToPlain } from 'class-transformer';
 
 import { BcryptService, JsonWebTokenService } from '../core';
 import { User } from './user.entity';
@@ -22,11 +23,7 @@ export class UserService {
     if (!isValidPassword) {
       throw new UnauthorizedException();
     }
-    const token = this.jwtService.sign({
-      id: user.id,
-      email: user.email,
-      roles: user.roles
-    });
+    const token = this.jwtService.sign(classToPlain(user));
     return { user, token };
   }
 
@@ -38,5 +35,10 @@ export class UserService {
 
   public async getUsers() {
     return this.userRepository.getUsers({});
+  }
+
+  public updateProfileById(id: number, data: User) {
+    delete data.password;
+    return this.userRepository.updateUserById(id, data);
   }
 }
