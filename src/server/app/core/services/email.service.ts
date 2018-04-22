@@ -1,9 +1,9 @@
 import { Component } from '@nestjs/common';
 import { createTransport, Transporter } from 'nodemailer';
 import { MailOptions } from 'nodemailer/lib/sendmail-transport';
-import { join } from 'path';
 
 import { EmailConfig } from '../../../../common/interfaces/email-config';
+import { ConfigService } from './config.service';
 
 @Component()
 export class EmailService {
@@ -11,7 +11,7 @@ export class EmailService {
   private config: EmailConfig;
   private transporter: Transporter;
 
-  constructor() {
+  constructor(private readonly configService: ConfigService) {
     this.init();
   }
 
@@ -38,8 +38,7 @@ export class EmailService {
 
   private loadEmailConfig() {
     try {
-      const configPath = join(process.cwd(), 'config', 'server', 'email-config.js');
-      this.config = require(configPath);
+      this.config = this.configService.getConfigByFilename('email-config');
     } catch (error) {
       console.log('error loading config');
     }
