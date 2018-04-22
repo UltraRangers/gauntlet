@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { BcryptService } from './services/bcrypt.service';
+import { ConfigService } from './services/config.service';
 import { EmailService } from './services/email.service';
 import { JsonWebTokenService } from './services/jsonwebtoken.service';
 
@@ -8,12 +9,14 @@ import { JsonWebTokenService } from './services/jsonwebtoken.service';
   components: [
     BcryptService,
     JsonWebTokenService,
-    EmailService
+    EmailService,
+    ConfigService
   ],
   exports: [
     BcryptService,
     JsonWebTokenService,
-    EmailService
+    EmailService,
+    ConfigService
   ]
 })
 export class CoreModule {}
