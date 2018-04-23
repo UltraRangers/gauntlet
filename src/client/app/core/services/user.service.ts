@@ -63,6 +63,7 @@ export class UserService {
     return this.apiService.put(`/users/profile`, data)
       .do((user: User) => {
         console.log('updated current user', user);
+        this.currentUserSource.next(user);
       });
   }
 }
