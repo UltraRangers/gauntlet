@@ -10,7 +10,12 @@ const routes: Routes = [
     path: '',
     component: CmsComponent,
     canActivate: [CurrentUserGuard],
-    children: []
+    children: [
+      {
+        path: 'profile',
+        loadChildren: '../profile/profile.module#ProfileModule'
+      }
+    ]
   }
 ];
 
