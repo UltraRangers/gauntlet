@@ -7,9 +7,7 @@ import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [],
   declarations: [],
   providers: [

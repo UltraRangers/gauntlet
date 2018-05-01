@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserService } from '../../core';
-import { DialogService } from '../../shared';
+import { UserService } from '../core';
+import { DialogService } from '../shared';
 
 @Component({
   selector: 'login',

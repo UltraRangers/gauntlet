@@ -3,16 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PublicComponent } from './public.component';
 
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-
 const routes: Routes = [
   {
     path: '',
     component: PublicComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent }
+      { path: '', loadChildren: '../home/home.module#HomeModule' },
+      { path: 'login', loadChildren: '../login/login.module#LoginModule' }
     ]
   }
 ];
@@ -23,8 +20,4 @@ const routes: Routes = [
 })
 export class PublicRoutingModule { }
 
-export const routedComponents = [
-  PublicComponent,
-  HomeComponent,
-  LoginComponent
-];
+export const routedComponents = [PublicComponent];
