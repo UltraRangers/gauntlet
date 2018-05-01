@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { FindManyOptions } from 'typeorm';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -45,7 +46,7 @@ export class UserService {
   public logout() {
     this.currentUserSource.next(null);
     this.apiService.setAccessToken(null);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/home');
   }
 
   public getMe(): Observable<User> {
@@ -57,5 +58,9 @@ export class UserService {
         this.currentUserSource.next(null);
         this.apiService.setAccessToken(null);
       });
+  }
+
+  public getUsers(options: FindManyOptions<User>): Observable<User[]> {
+    return this.apiService.get(`/users`, { options });
   }
 }

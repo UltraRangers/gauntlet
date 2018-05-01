@@ -9,21 +9,21 @@ export class UserRepository extends Repository<User> {
     return this.save(user);
   }
 
-  public async getUsers(options?: FindManyOptions<User>): Promise<User[]> {
-    if (!options) {
-      options = {};
-    }
-    return this.find(options);
-  }
-
   public async getUserById(id: number): Promise<User> {
-    return this.findOneById(id);
+    return this.findOneById(id, {
+      relations: ['roles']
+    });
   }
 
   public async getUserByEmail(email: string): Promise<User> {
     return this.findOne({
+      relations: ['roles'],
       where: { email }
     });
+  }
+  
+  public async getUsers(options: FindManyOptions<User>): Promise<User[]> {
+    return this.find(options);
   }
 
 }

@@ -7,10 +7,12 @@ import { CmsComponent } from './cms.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'cms',
     component: CmsComponent,
     canActivate: [CurrentUserGuard],
-    children: []
+    children: [
+      { path: '', loadChildren: '../users/users.module#UsersModule' }
+    ]
   }
 ];
 

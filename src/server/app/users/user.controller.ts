@@ -1,14 +1,19 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Inject, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { FindManyOptions } from 'typeorm';
 
 import { AccessTokenGuard, CurrentUser } from '../core';
 
 import { User } from './user.entity';
+import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 
 @Controller('/users')
 export class UserController {
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    @Inject(UserRepository) private readonly userRepository: UserRepository,
+    private readonly userService: UserService
+  ) {}
 
   @Post('login')
   public login(
@@ -23,11 +28,15 @@ export class UserController {
   public getMe(
     @CurrentUser() currentUser: User
   ): Promise<User> {
-    return this.userService.getUserById(currentUser.id);
+    return this.userRepository.getUserById(currentUser.id);
   }
 
   @Get()
-  public getUsers() {
-    return this.userService.getUsers();
+  public getUsers(
+    @Query('options') options: FindManyOptions<User>
+  ) {
+    return this.userRepository.getUsers({
+      relations: ['roles']
+    });
   }
 }

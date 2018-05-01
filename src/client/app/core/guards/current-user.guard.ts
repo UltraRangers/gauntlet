@@ -15,7 +15,7 @@ export class CurrentUserGuard implements CanActivate {
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.userService.currentUser$.map((user: User) => {
       if (!user) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
       return !!user;
     })
