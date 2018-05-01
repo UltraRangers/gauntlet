@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DialogService, ListColumn } from '../../shared';
+import { DialogService, ListColumn } from '../shared';
 
 @Component({
   selector: 'home',
