@@ -105,4 +105,51 @@ describe('UserController', () => {
         .expect(200);
     });
   });
+
+  describe.only('changePassword', async () => {
+    it('should return 400 with no new password', async () => {
+      const data = await userService.login({
+        email: `admin@test.com`,
+        password: `test`
+      });
+      await server
+        .put(`/api/users/${data.user.id}`)
+        .set('x-access-token', data.token)
+        .send({previousPassword: 'test'})
+        .expect(400);
+    });
+    it('should return 400 with no previous password', async () => {
+      const data = await userService.login({
+        email: `admin@test.com`,
+        password: `test`
+      });
+      await server
+        .put(`/api/users/${data.user.id}`)
+        .set('x-access-token', data.token)
+        .send({newPassword: 'test'})
+        .expect(400);
+    });
+    it('should return 400 with invalid previous password', async () => {
+      const data = await userService.login({
+        email: `admin@test.com`,
+        password: `test`
+      });
+      await server
+        .put(`/api/users/${data.user.id}`)
+        .set('x-access-token', data.token)
+        .send({previousPassword: 'invalidpassword'})
+        .expect(400);
+    });
+    it('should return 200 with valid data', async () => {
+      const data = await userService.login({
+        email: `admin@test.com`,
+        password: `test`
+      });
+      await server
+        .put(`/api/users/${data.user.id}`)
+        .set('x-access-token', data.token)
+        .send({previousPassword: 'test', newPassword: 'test'})
+        .expect(200);
+    });
+  });
 });

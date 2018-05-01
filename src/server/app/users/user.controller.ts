@@ -1,5 +1,7 @@
-import { Body, Controller, Inject, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Inject, Get, Post, Param, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { FindManyOptions } from 'typeorm';
+
+ValidationPipe
 
 import { AccessTokenGuard, CurrentUser } from '../core';
 
@@ -38,5 +40,16 @@ export class UserController {
     return this.userRepository.getUsers({
       relations: ['roles']
     });
+  }
+
+  @Put(':userId')
+  @UseGuards(AccessTokenGuard)
+  public changePassword(
+    @Param('userId') userId: number,
+    @Body() data: any
+  ) {
+    console.log(data);
+    console.log(userId);
+    return this.userService.changePassword(userId, data);
   }
 }

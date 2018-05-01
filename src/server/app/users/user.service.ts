@@ -1,4 +1,4 @@
-import { Component, Inject, UnauthorizedException } from '@nestjs/common';
+import { Component, Inject, UnauthorizedException, BadRequestException, NotFoundException } from '@nestjs/common';
 import { classToPlain } from 'class-transformer';
 
 import { BcryptService, JsonWebTokenService } from '../core';
@@ -25,6 +25,26 @@ export class UserService {
     }
     const token = this.jwtService.sign(classToPlain(user));
     return { user, token };
+  }
+
+  public async changePassword(userId: number, data: {
+    previousPassword: string,
+    newPassword: string
+  }): Promise<void> {
+    if (!userId || !data.newPassword || !data.previousPassword) {
+      throw new BadRequestException();
+    }
+    const user = await this.userRepository.getUserById(userId);
+    if (!user) {
+      throw new NotFoundException();
+    }
+    const isValidPassword = await this.bcryptService.compareHash(data.previousPassword, user.password);
+    if (!isValidPassword) {
+      throw new BadRequestException();
+    }
+    return this.userRepository.updateById(userId, {
+      password: await this.bcryptService.hash(data.newPassword)
+    });
   }
 
 }
