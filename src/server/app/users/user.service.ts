@@ -1,5 +1,7 @@
 import { Component, Inject, UnauthorizedException, BadRequestException, NotFoundException } from '@nestjs/common';
 import { classToPlain } from 'class-transformer';
+import { compileFile } from 'pug';
+import { join } from 'path';
 
 import { BcryptService, EmailService, JsonWebTokenService } from '../core';
 import { User } from './user.entity';
@@ -52,25 +54,15 @@ export class UserService {
     const user = await this.userRepository.getUserByEmail(data.email);
     if (!user) throw new NotFoundException();
     const token = this.jwtService.sign(classToPlain(user));
-    await this.emailService.sendMailTemplate(
-      'reset-password',
-      { name: 'test' },
-      {
-        to: 'cedrickmandocdoc@gmail.com',
-        subject: 'Reset Password'
-      }
-    );
-    // await this.emailService.sendMail({
-    //   to: 'cedrickmandocdoc@gmail.com',
-    //   subject: 'Reset Passwd',
-    //   text: 'Reset Password',
-    //   html: `
-    //     <p>Click the link below to reset your password.</p>
-    //     <p>http://localhost:8080/users/reset/password?token=${token}</p>
-    //   `
-    // });
-    console.log('email sent');
-    return;
+    const context = {
+      user,
+      link: `http://localhost:8080/users/reset/password?token=${token}`
+    };
+    return this.emailService.sendMail({
+      to: 'cedrickmandocdoc@gmail.com',
+      subject: 'Reset Password',
+      html:  compileFile(join(process.cwd(), 'src', 'server', 'templates', 'reset-password.pug'))(context)
+    });
   }
 
 }
