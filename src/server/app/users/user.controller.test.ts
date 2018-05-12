@@ -113,7 +113,7 @@ describe('UserController', () => {
         password: `test`
       });
       await server
-        .put(`/api/users/${data.user.id}`)
+        .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
         .send({previousPassword: 'test'})
         .expect(400);
@@ -124,7 +124,7 @@ describe('UserController', () => {
         password: `test`
       });
       await server
-        .put(`/api/users/${data.user.id}`)
+        .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
         .send({newPassword: 'test'})
         .expect(400);
@@ -135,7 +135,7 @@ describe('UserController', () => {
         password: `test`
       });
       await server
-        .put(`/api/users/${data.user.id}`)
+        .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
         .send({previousPassword: 'invalidpassword'})
         .expect(400);
@@ -146,7 +146,7 @@ describe('UserController', () => {
         password: `test`
       });
       await server
-        .put(`/api/users/${data.user.id}`)
+        .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
         .send({previousPassword: 'test', newPassword: 'test'})
         .expect(200);
