@@ -9,7 +9,8 @@ const routes: Routes = [
     component: PublicComponent,
     children: [
       { path: '', loadChildren: '../home/home.module#HomeModule' },
-      { path: '', loadChildren: '../login/login.module#LoginModule' }
+      { path: '', loadChildren: '../login/login.module#LoginModule' },
+      { path: '', loadChildren: '../forgot-password/forgot-password.module#ForgotPasswordModule' }
     ]
   }
 ];

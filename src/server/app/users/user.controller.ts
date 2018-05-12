@@ -42,14 +42,20 @@ export class UserController {
     });
   }
 
-  @Put(':userId')
+  @Put(':id/password')
   @UseGuards(AccessTokenGuard)
   public changePassword(
-    @Param('userId') userId: number,
+    @Param('id') id: number,
     @Body() data: any
   ) {
-    console.log(data);
-    console.log(userId);
-    return this.userService.changePassword(userId, data);
+    return this.userService.changePassword(id, data);
   }
+
+  @Post('reset-password')
+  public sendResetPasswordEmail(
+    @Body() data: any
+  ) {
+    return this.userService.sendResetPasswordEmail(data);
+  }
+
 }

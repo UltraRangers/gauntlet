@@ -4,15 +4,8 @@ import { join } from 'path';
 @Component()
 export class ConfigService {
 
-  public getConfig(filename: string) {
-    let path = this.getConfigPath();
-    try {
-      path = join(this.getConfigPath(), `${filename}.${process.env.NODE_ENV}`);
-      return require(path);
-    } catch (error) {
-      path = join(this.getConfigPath(), `${filename}`);
-      return require(path);
-    }
+  public getEmailConfig() {
+    return require(join(this.getConfigPath(), 'email-config.json'));
   }
 
   private getConfigPath(): string {

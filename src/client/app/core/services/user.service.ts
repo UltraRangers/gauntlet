@@ -63,4 +63,8 @@ export class UserService {
   public getUsers(options: FindManyOptions<User>): Observable<User[]> {
     return this.apiService.get(`/users`, { options });
   }
+
+  public sendResetPasswordEmail(data: {email: string}): Observable<void> {
+    return this.apiService.post(`/users/reset-password`, data);
+  }
 }

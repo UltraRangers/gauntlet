@@ -1,46 +1,40 @@
 import { Component } from '@nestjs/common';
-import { createTransport, Transporter } from 'nodemailer';
-import { MailOptions } from 'nodemailer/lib/sendmail-transport';
+import { createTransport, Transporter, SendMailOptions } from 'nodemailer';
+import { join } from 'path';
+import EmailTemplate from 'email-templates';
 
-import { EmailConfig } from '../../../../common/interfaces/email-config';
 import { ConfigService } from './config.service';
 
 @Component()
 export class EmailService {
 
-  private config: EmailConfig;
+  private config: any;
   private transporter: Transporter;
 
-  constructor(private readonly configService: ConfigService) {
-    this.init();
-  }
-
-  public async sendMail(mailOptions: MailOptions) {
-    if (!this.transporter || this.config) {
-      this.init();
-    }
-    try {
-      mailOptions.from = this.config.auth.user;
-      await this.transporter.sendMail(mailOptions);
-    } catch (error) {
-      console.log('failed sending email');
-    }
-  }
-
-  private init() {
-    this.loadEmailConfig();
-    this.initTransporter();
-  }
-
-  private initTransporter() {
+  constructor(
+    private readonly configService: ConfigService
+  ) {
+    this.config = this.configService.getEmailConfig();
     this.transporter = createTransport(this.config);
   }
 
-  private loadEmailConfig() {
-    try {
-      this.config = this.configService.getConfig('email-config');
-    } catch (error) {
-      console.log('error loading config');
-    }
+  public sendMail(options: SendMailOptions) {
+    options.from = this.config.auth.user;
+    return this.transporter.sendMail(options);
   }
+
+  public async sendMailTemplate(template: string, data, options: SendMailOptions) {
+    const emailTemplate = new EmailTemplate({
+      message: 'test',
+      views: {
+        root: join(process.cwd(), 'src', 'server', 'templates')
+      }
+    });
+    console.log(template);
+    const html = await emailTemplate.render(template, data);
+    options.html = html;
+    return this.transporter.sendMail(options);
+
+  }
+
 }
