@@ -5,6 +5,7 @@ export * from './core.module';
 export * from './services/bcrypt.service';
 export * from './services/email.service';
 export * from './services/jsonwebtoken.service';
+export * from './services/pug.service';
 
 // core guards
 export * from './guards/access-token.guard';

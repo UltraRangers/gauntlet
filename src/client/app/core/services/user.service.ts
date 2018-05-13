@@ -67,4 +67,8 @@ export class UserService {
   public sendResetPasswordEmail(data: {email: string}): Observable<void> {
     return this.apiService.post(`/users/reset-password`, data);
   }
+
+  public resetPassword(data: {currentPassword: string, newPassword: string}): Observable<void> {
+    return this.apiService.put(`/users/reset-password`, data);
+  }
 }

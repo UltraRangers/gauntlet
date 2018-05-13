@@ -106,7 +106,7 @@ describe('UserController', () => {
     });
   });
 
-  describe.only('changePassword', async () => {
+  describe('updatePassword', async () => {
     it('should return 400 with no new password', async () => {
       const data = await userService.login({
         email: `admin@test.com`,
@@ -115,7 +115,7 @@ describe('UserController', () => {
       await server
         .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
-        .send({previousPassword: 'test'})
+        .send({currentPassword: 'test'})
         .expect(400);
     });
     it('should return 400 with no previous password', async () => {
@@ -137,7 +137,7 @@ describe('UserController', () => {
       await server
         .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
-        .send({previousPassword: 'invalidpassword'})
+        .send({currentPassword: 'invalidpassword'})
         .expect(400);
     });
     it('should return 200 with valid data', async () => {
@@ -148,7 +148,7 @@ describe('UserController', () => {
       await server
         .put(`/api/users/${data.user.id}/password`)
         .set('x-access-token', data.token)
-        .send({previousPassword: 'test', newPassword: 'test'})
+        .send({currentPassword: 'test', newPassword: 'test'})
         .expect(200);
     });
   });

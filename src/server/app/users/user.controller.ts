@@ -1,8 +1,6 @@
 import { Body, Controller, Inject, Get, Post, Param, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { FindManyOptions } from 'typeorm';
 
-ValidationPipe
-
 import { AccessTokenGuard, CurrentUser } from '../core';
 
 import { User } from './user.entity';
@@ -44,11 +42,11 @@ export class UserController {
 
   @Put(':id/password')
   @UseGuards(AccessTokenGuard)
-  public changePassword(
+  public updatePassword(
     @Param('id') id: number,
     @Body() data: any
   ) {
-    return this.userService.changePassword(id, data);
+    return this.userService.updatePassword(id, data);
   }
 
   @Post('reset-password')
@@ -56,6 +54,15 @@ export class UserController {
     @Body() data: any
   ) {
     return this.userService.sendResetPasswordEmail(data);
+  }
+
+  @Put('reset-password')
+  @UseGuards(AccessTokenGuard)
+  public resetPassword(
+    @CurrentUser() currentUser: User,
+    @Body() data: any
+  ) {
+    return this.userService.updatePassword(currentUser.id, data);
   }
 
 }

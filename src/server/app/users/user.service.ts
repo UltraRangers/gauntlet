@@ -3,7 +3,7 @@ import { classToPlain } from 'class-transformer';
 import { compileFile } from 'pug';
 import { join } from 'path';
 
-import { BcryptService, EmailService, JsonWebTokenService } from '../core';
+import { BcryptService, EmailService, JsonWebTokenService, PugService } from '../core';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
@@ -14,7 +14,8 @@ export class UserService {
     @Inject(UserRepository) private readonly userRepository: UserRepository,
     private readonly jwtService: JsonWebTokenService,
     private readonly bcryptService: BcryptService,
-    private readonly emailService: EmailService
+    private readonly emailService: EmailService,
+    private readonly pugService: PugService
   ) {}
 
   public async login(data: {email: string, password: string}): Promise<{ user: User, token: string }> {
@@ -30,18 +31,18 @@ export class UserService {
     return { user, token };
   }
 
-  public async changePassword(userId: number, data: {
-    previousPassword: string,
+  public async updatePassword(userId: number, data: {
+    currentPassword: string,
     newPassword: string
   }): Promise<void> {
-    if (!userId || !data.newPassword || !data.previousPassword) {
+    if (!userId || !data.newPassword || !data.currentPassword) {
       throw new BadRequestException();
     }
     const user = await this.userRepository.getUserById(userId);
     if (!user) {
       throw new NotFoundException();
     }
-    const isValidPassword = await this.bcryptService.compareHash(data.previousPassword, user.password);
+    const isValidPassword = await this.bcryptService.compareHash(data.currentPassword, user.password);
     if (!isValidPassword) {
       throw new BadRequestException();
     }
@@ -56,12 +57,13 @@ export class UserService {
     const token = this.jwtService.sign(classToPlain(user));
     const context = {
       user,
-      link: `http://localhost:8080/users/reset/password?token=${token}`
+      link: `http://localhost:8080/reset-password?token=${token}`
     };
+    const html = this.pugService.compileFile(join(process.cwd(), 'src', 'server', 'templates', 'reset-password.pug'), context);
     return this.emailService.sendMail({
       to: 'cedrickmandocdoc@gmail.com',
       subject: 'Reset Password',
-      html:  compileFile(join(process.cwd(), 'src', 'server', 'templates', 'reset-password.pug'))(context)
+      html: html
     });
   }
 

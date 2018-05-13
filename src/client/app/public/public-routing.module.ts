@@ -10,7 +10,8 @@ const routes: Routes = [
     children: [
       { path: '', loadChildren: '../home/home.module#HomeModule' },
       { path: '', loadChildren: '../login/login.module#LoginModule' },
-      { path: '', loadChildren: '../forgot-password/forgot-password.module#ForgotPasswordModule' }
+      { path: '', loadChildren: '../forgot-password/forgot-password.module#ForgotPasswordModule' },
+      { path: '', loadChildren: '../reset-password/reset-password.module#ResetPasswordModule' }
     ]
   }
 ];

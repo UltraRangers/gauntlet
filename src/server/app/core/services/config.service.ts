@@ -4,11 +4,14 @@ import { join } from 'path';
 @Component()
 export class ConfigService {
 
-  public getEmailConfig() {
-    return require(join(this.getConfigPath(), 'email-config.json'));
+  private configPath: string;
+
+  constructor() {
+    this.configPath = join(process.cwd(), 'config', 'server');
   }
 
-  private getConfigPath(): string {
-    return join(process.cwd(), 'config', 'server');
+  public getEmailConfig() {
+    return require(join(this.configPath, 'email-config.json'));
   }
+
 }

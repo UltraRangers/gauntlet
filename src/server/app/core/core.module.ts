@@ -4,19 +4,22 @@ import { BcryptService } from './services/bcrypt.service';
 import { ConfigService } from './services/config.service';
 import { EmailService } from './services/email.service';
 import { JsonWebTokenService } from './services/jsonwebtoken.service';
+import { PugService } from './services/pug.service';
 
 @Module({
   components: [
     BcryptService,
-    JsonWebTokenService,
+    ConfigService,
     EmailService,
-    ConfigService
+    JsonWebTokenService,
+    PugService
   ],
   exports: [
     BcryptService,
-    JsonWebTokenService,
+    ConfigService,
     EmailService,
-    ConfigService
+    JsonWebTokenService,
+    PugService
   ]
 })
 export class CoreModule {}
